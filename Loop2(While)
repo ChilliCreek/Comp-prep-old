@@ -1,0 +1,16 @@
+//If input is palindrome it will print YES,if it is not it will print NO.
+#include<cstdio>
+main(){
+    int a,b,c,d;
+    scanf("%d",&a);
+    d=a;
+    while(a>0){
+        c=a%10;
+        a=a/10;
+        b=b+c;
+        b=b*10;
+    }
+    b=b/10;
+    if(b==d)printf("YES");
+    else printf("NO");
+}
