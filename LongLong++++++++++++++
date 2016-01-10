@@ -1,0 +1,102 @@
+#include <cstdio>
+#include <string.h>
+#include<algorithm>
+using namespace std;
+main(){
+      int temp,tempa,o,h,d,e,g,j,n,m,y,v;
+      int f[10000] = {0},k[10000]= {0},l[10000]= {0};
+      char b[100],c[100];
+      scanf("%s",c);
+      scanf("%s",b);
+      o=strlen(b);
+      j = strlen(c);
+      m=max(o,j);
+      if(o>j){
+      	   v=o-j;
+           for(h=o-1;h>=0;h--){
+                        f[h]=b[h]-48;
+           }
+           for(h=o-1;h>=0;h--){
+                        k[h+v]=c[h]-48;
+           }
+           for(d=(o-1);d>=0;d--){
+                        if(f[d]+k[d]>=10){
+                                e=1;
+                        }  
+                        if(f[d]+k[d]<10){
+                                    e=0;
+                        }  
+                        if(e==0){
+                                 l[d]=f[d]+k[d];
+                        }
+                        if(e==1){
+                                 l[d+1]=(f[d]+k[d])%10;
+                                 if(d-1==-1&&l[0]==0){
+                                     l[d]++;
+                                 }
+                                 else f[d-1]++;
+                        }
+           }
+      }
+      if(o <j){
+      	   v=j-o;
+           for(h=j-1;h>=0;h--){
+                        f[h]=c[h]-48;
+           }
+           for(h=j-1;h>=0;h--){
+                        k[h+v]=b[h]-48;
+           } 
+           for(d=j-1;d>=0;d--){
+                        if(f[d]+k[d]>=10){
+                                          e=1;
+                        }  
+                        if(f[d]+k[d]<10){
+                                          e=0;
+                        }  
+                        if(e==0){
+                                 l[d+1]=f[d]+k[d];
+                        }
+                        if(e==1){
+                                 l[d+1]=(k[d]+f[d])%10;
+                                 if(d-1==-1&&l[0]==0){
+                                 	    l[d]++;
+                                 }
+                                 else f[d-1]++;
+                        }
+           }
+      }
+      if(o==j){
+           for(h = j-1;h>=0;h--){
+                        f[h+1]=c[h]-48;
+                        f[0]=0;
+           }
+           for(h = j-1;h>=0;h--){
+                        k[h+1]=b[h]-48;
+           }
+           for(d=j;d>=0;d--){
+                        if(f[d]+k[d]>=10){
+                                          e=1;
+                        }  
+                        if(f[d]+k[d]<10){
+                                          e=0;
+                        }  
+                        if(e==0){
+                                 l[d]=f[d]+k[d];
+                        }
+                        if(e==1){
+                                 l[d]=(f[d]+k[d])%10;
+                                 f[d-1]++;
+                        }
+           }
+      }
+      if(l[0] != 0){
+              printf("%d",l[0]);
+        }
+      for(n=1;n<=m;n++){
+      	printf("%d",l[n]);
+      }
+}
+
+
+
+
