@@ -1,0 +1,8 @@
+#include<cstdio> 
+main() 
+{ 
+int b; 
+scanf("%d",&b); 
+printf("%d",(b+1)*(b+2)*(b+3)*(b+4)*(b+5)/120); 
+return 0;
+} 
