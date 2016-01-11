@@ -20,6 +20,10 @@ Output2:7
 Input3:4
        1 0 0 1
 Output3:4       
+#Dice
+Desc:Coming soon......
+Input1:6
+Output1:462
        
        
        
