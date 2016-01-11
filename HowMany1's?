@@ -1,0 +1,29 @@
+#include<cstdio>
+main(){
+    int n,b,coodinatea,coordinateb,e,f,g,h,j=0,k,max = 0;
+    scanf("%d",&n);
+    int  a[n];
+    for(int i=0; i<n; i++){
+        scanf("%d",&a[i]);
+    }              
+    for(coordinatea = 0; coordinatea < n; coordinatea++){
+        for(coordinateb = coodinatea; coordinateb < n; coordinateb++){
+            for(e = coordinatea; e <= coodinateb; e++){
+                a[e]=1-a[e];
+            }
+            j = 0;
+            for(h = 0; h < n; h++){
+                if(a[h]==1)j++; 
+            }
+            if(j > max)max = j; 
+            j = 0;
+            for(e = coordinatea ;e <= coodinateb;e++){
+                a[e]=1-a[e];
+            }     
+        }
+    }
+    printf("%d",max);
+    //for(;;);
+}
+
+
