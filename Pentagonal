@@ -1,0 +1,14 @@
+#include<cstdio>
+main(){
+	int a,b,athnumber=0,f=1;
+	int u[10000];
+	scanf("%d",&a);
+	for(b=0;b<=a;b++){
+		u[b]=f;
+		f=f+3;
+	}
+	for(b=0;b<a;b++){
+		athnumber=athnumber+u[b];
+	}
+	printf("%d",athnumber);
+}
