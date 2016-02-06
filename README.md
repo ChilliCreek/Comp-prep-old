@@ -24,7 +24,12 @@ Output3:4
 Desc:Coming soon......
 Input1:6
 Output1:462
-       
+#Pentagonal
+This program finds nth number of pentagonal order.
+Input1:4
+Output1:22
+input2:3
+outputt2:12
        
        
       
