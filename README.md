@@ -30,6 +30,11 @@ Input1:4
 Output1:22
 input2:3
 outputt2:12
+#bubble sort
+input1:5
+       1 2 5 3 4
+output1:1 2 3 4 5
+       
        
        
       
