@@ -18,16 +18,8 @@ void bubble(int u[],int b){
 		}
  	}
 }
-/* void selection(int a,int u[],int b,int min){
- 	for(a=0;a<b;a++){
- 	    for(a=0;a<b;a++){
- 	        u[a]=u[a+1];
- 	        i
-	    }
-	}
- }*/
 main(){
- 	int a,b,c,min,d=0,t,l=0;
+ 	int a,b,c;
  	int u[1000];
  	scanf("%d",&b);
  	for(a=0;a<b;a++){
