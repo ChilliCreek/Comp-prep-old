@@ -31,9 +31,16 @@ Output1:22
 input2:3
 outputt2:12
 #bubble sort
+It sorts a list of number's using bubble sort method.
 input1:5
        1 2 5 3 4
 output1:1 2 3 4 5
+#Fibonacci nth
+It will print nth number of fibonacci order.
+Input1:5
+Output1:5
+Input2:7
+Output2:13
        
        
        
