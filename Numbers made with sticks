@@ -145,5 +145,5 @@ main(){
             max=max+2;
         }
     }
-    printf("%d",max);
+    printf(" %d sticks",max);
 }
