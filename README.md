@@ -41,7 +41,15 @@ Input1:5
 Output1:5
 Input2:7
 Output2:13
-       
+#Numbers made with sticks
+NOTE:you have to create in/out file to run this file.
+It turns normal numbers like "6" to a number made with sticks and print how many sticks you need to create those numbers.Example:
+Input:1313978675674
+Output:
+   _    _  _  _   _  _  _   _  _  _     
+ | _| | _||_|  | |_||_   | |_ |_   | |_|
+ | _| | _| _|  | |_||_|  |  _||_|  |   | 57
+  
        
        
       
