@@ -5,7 +5,7 @@ main(){
     int a,b,max=0,t=0,tt=0;
     char c[1000];
     freopen("lolzmaa.in","r",stdin);
-    freopen("lolzmaa.out","w",stdout);
+    freopen("lolzmaa.out","w",stdout);//you need to create in/out file to run this.otherwise it wont work
     scanf("%s",&c);
     a=strlen(c);
     if((c[0]-48)==0){
