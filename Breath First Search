@@ -1,0 +1,60 @@
+#include<cstdio>
+#include<queue>
+using namespace std;
+main(){
+	int d,e,b,c,f=1,n,mx = 0;
+	int a[100][100];
+	int h[2][100];
+	scanf("%d %d",&n,&b);
+	queue <int> x,y;
+	for(c=0;c<n;c++){
+		for(d=0;d<b;d++){
+			scanf("%d",&a[c][d]);
+		}
+	}
+	for(c=0;c<n;c++){
+		for(d=0;d<b;d++){
+            if(a[c][d] == 0){
+                x.push(c);
+                y.push(d);
+                
+            }
+			while(x.size()>0){
+            	if(a[x.front()-1][y.front()]==0 && x.front()-1 >=0){
+            		x.push(x.front()-1);
+            		y.push(y.front());
+            		f++;
+            		a[x.front()-1][y.front()]=2;
+            	}
+            	if(a[x.front()+1][y.front()]==0 && x.front()+1 < n){
+            		x.push(x.front()+1);
+            		y.push(y.front());
+            		f++;
+            		a[x.front()+1][y.front()]=2;
+            		
+            	}
+            	if(a[x.front()][y.front()-1]==0 && y.front()-1 >=0){
+            		x.push(x.front());
+            		y.push(y.front()-1);
+            		f++;
+            		a[x.front()][y.front()-1]=2;
+            	}
+            	if(a[x.front()][y.front()+1]==0 && y.front()+1 < b){
+            		x.push(x.front());
+            		y.push(y.front()+1);
+            		f++;
+            		a[x.front()][y.front()+1]=2;
+            	}
+            	a[x.front()][y.front()]=2;
+            	x.pop();
+            	y.pop();
+            }
+            if(mx < f)
+            mx = f;
+            f = 1;
+		}
+	}
+    
+    printf("%d",mx);
+    for(;;);
+}
