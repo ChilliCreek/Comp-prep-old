@@ -49,3 +49,9 @@ Output:
    _    _  _  _   _  _  _   _  _  _     
  | _| | _||_|  | |_||_   | |_ |_   | |_|
  | _| | _| _|  | |_||_|  |  _||_|  |   | 57
+#MicrosoftExcelRowAndColumn
+input:r1c703
+output:AAA1
+DEesc:In old microsoft Excel Row anc columns were marked r1c1etc.But in newer version its A1.....Z1.....AA1,,,,,AZ1....AAA!....ZZZ!
+this program converts it
+
