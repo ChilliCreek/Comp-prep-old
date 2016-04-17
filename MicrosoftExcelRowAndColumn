@@ -1,0 +1,27 @@
+#include<cstdio>
+main(){
+    int a,b,c,d,e,j=0;
+    int o[100];
+    char h,m,n;
+    scanf("%c%d%c%d",&n,&a,&h,&b);
+    while(b>0){
+        o[j]=b%26;
+        if(o[j]==0){
+            b=b/26-1;
+        }
+        else b=b/26;
+        j++;
+    }
+    j=j-1;
+    while(j>-1){
+        if(o[j]>0){
+            printf("%c",64+o[j]);
+        }
+        if(o[j]==0){
+            printf("%c",90);
+        }
+        j--;
+    }
+    printf("%d",a);
+    for(;;);
+}
