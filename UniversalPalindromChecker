@@ -16,8 +16,8 @@ main(){
             a=a-1;
             b++;}
        if(k==1){
-            printf("The word you entered is palindrom");}
+            printf("The string you entered is palindrom");}
        if(k!=1){
-            printf("The word you entered is not palindrom");}
+            printf("The string you entered is not palindrom");}
        for(;;);
 }
