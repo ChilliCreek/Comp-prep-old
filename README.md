@@ -54,4 +54,13 @@ input:r1c703
 output:AAA1
 DEesc:In old microsoft Excel Row anc columns were marked r1c1etc.But in newer version its A1.....Z1.....AA1,,,,,AZ1....AAA!....ZZZ!
 this program converts it
-
+#UniversalPalindromChecker
+It can check any string or number if its palindrom.
+It will print "The string you entered is palindrom" if it is.
+It will print "The string you entered is not palindrom" if it is not.
+Input1=maaam
+Output1=The string you entered is palindrom
+Input2=amsgs
+Output2=The string you entered is not palindrom
+Input3=878
+Output3=The string you entered is palindrom etc.
