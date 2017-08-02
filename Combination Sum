@@ -1,0 +1,73 @@
+#include<cstdio>
+#include<vector>
+//Given a set of candidate numbers (C) (without duplicates) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+
+//The same repeated number may be chosen from C unlimited number of times.
+
+//Note:
+//All numbers (including target) will be positive integers.
+//The solution set must not contain duplicate combinations.
+//For example, given candidate set [2, 3, 6, 7] and target 7, 
+//A solution set is: 
+//[
+//  [7],
+//  [2, 2, 3]
+//]
+std:: vector < std::vector <int> > totalsum (std::vector < std::vector <int> > combination,int target,int sum,std::vector <int> usablenumbers,std::vector <int> temp){
+	int temp1,temp2,temp3,i = 0;
+	for(temp1 = 0;temp1 < usablenumbers.size();temp1++){
+		if(sum + usablenumbers[temp1] < target){
+			sum = sum + usablenumbers[temp1];
+			temp.push_back(usablenumbers[temp1]);
+			combination = totalsum(combination,target,sum,usablenumbers,temp);
+			sum = sum - usablenumbers[temp1];
+			temp.pop_back();
+		} else if(sum + usablenumbers[temp1] == target){
+			temp.push_back(usablenumbers[temp1]);
+			for(temp1 = 0;temp1 < combination.size();temp1++){
+				if(combination[temp1].size() != temp.size()){
+					combination.push_back(temp);
+				} else if(combination[temp1].size() == temp.size()){
+					for(temp2 = 0;temp2 < combination[temp1].size();temp2++){
+						for(temp3 = 0;temp3 < temp.size();temp3++){
+							if(temp[temp2]== combination[temp1][temp3]){
+								i++;
+							}
+						}
+					}
+					if(i < temp.size()){
+						combination.push_back(temp);
+					}
+					i = 0;
+				}
+			}
+			if(combination.size()==0){
+				combination.push_back(temp);
+			}
+			return combination;
+		}
+	}
+	return combination;
+}
+main(){
+	int target,c,temp1,temp2;
+	std::vector <int> temp;
+	int sum = 0;
+	scanf("%d",&target);
+	std::vector <std::vector <int> > combination;
+	std::vector <std::vector <int> > result;
+	std::vector <int> usablenumbers;
+	printf("Number of usable numbers:");
+	scanf("%d",&c);
+	for(temp1 = 0;temp1 < c;temp1++){
+		scanf("%d",&temp2);
+		usablenumbers.push_back(temp2);
+	}
+	result = totalsum(combination,target,sum,usablenumbers,temp);
+	for(temp2 = 0;temp2 < result.size();temp2++){
+		printf("\n");
+		for(int temp3 = 0;temp3 < result[temp2].size();temp3++){
+			printf("%d ", result[temp2][temp3]);
+		}
+	}
+}
