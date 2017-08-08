@@ -1,0 +1,44 @@
+//https://leetcode.com/static/images/problemset/out_of_boundary_paths_2.png
+//https://leetcode.com/static/images/problemset/out_of_boundary_paths_1.png
+//There is an m by n grid with a ball. Given the start coordinate (i,j) of the ball, 
+//you can move the ball to adjacent cell or cross the grid boundary in four directions (up, down, left, right). 
+//However, you can at most move N times. Find out the number of paths to move the ball out of grid boundary. 
+//The answer may be very large, return it after mod 109 + 7.
+#include<cstdio>
+int m,n;
+int FindWay(int m,int n,int N,int i,int j,int Ntemp,int result){
+	if(Ntemp > N){
+		return result;
+	}
+	bool indicator = false;
+	for(int temp = 0;temp < m;temp++){
+		for(int temp1 = 0;temp1 < n;temp1++){
+			if(temp == i && temp1 == j){
+				indicator = true;
+			}
+		}
+	}
+	if(indicator == false){
+		printf("%d %d %d %d\n",i,j,Ntemp,N,result);
+		result++;
+		return result;
+	}
+	if(Ntemp < N+1){
+		result = FindWay(m,n,N,i + 1,j,Ntemp+1,result);
+		result = FindWay(m,n,N,i ,j +1,Ntemp+1,result);
+		result = FindWay(m,n,N,i - 1,j,Ntemp+1,result);
+		result = FindWay(m,n,N,i ,j - 1,Ntemp+1,result);
+	}
+	return result;
+}
+main(){
+	int N,i,j,result = 0,Ntemp  = 0;
+	printf("Size of the grid: ");
+	scanf("%d %d",&m,&n);
+	printf("Number of moves: ");
+	scanf("%d",&N);
+	printf("Location of the ball: ");
+	scanf("%d %d",&i,&j);
+	result = FindWay(m,n,N,i,j,Ntemp,result);
+	printf("%d",result);
+}
