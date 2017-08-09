@@ -1,0 +1,50 @@
+#include<cstdio>
+#include<vector>
+//Initially on a notepad only one character 'A' is present. You can perform two operations on this notepad for each step:
+
+//Copy All: You can copy all the characters present on the notepad (partial copy is not allowed).
+//Paste: You can paste the characters which are copied last time.
+//Given a number n. You have to get exactly n 'A' on the notepad by performing the minimum number of steps permitted. Output the minimum number of steps to get n 'A'.
+
+//Example 1:
+//Input: 3
+//Output: 3
+//Explanation:
+//Intitally, we have one character 'A'.
+//In step 1, we use Copy All operation.
+//In step 2, we use Paste operation to get 'AA'.
+//In step 3, we use Paste operation to get 'AAA'.
+std::vector <int> pathfinder(int n,int copied,int temp,std::vector <int> results,int howmanytimes){
+	if(temp == n){
+		results.push_back(howmanytimes);
+		return results;
+	}
+	if(temp < n){
+		int copiedbackup = copied;
+		copied = temp;
+		if(temp + copied <=n){
+			results = pathfinder(n,copied,temp+copied,results,howmanytimes+2);
+		}
+		if(temp + copiedbackup <= n){
+			 results = pathfinder(n,copiedbackup,temp+copiedbackup,results,howmanytimes + 1);
+		}
+	}
+	return results;
+}
+main(){
+	std::vector <int> results;
+	int n,copied = 1,temp = 1,howmanytimes = 1,lowest;
+	scanf("%d",&n);
+	if(n != 1){
+		results = pathfinder(n,copied,temp,results,howmanytimes);
+		lowest = results.front();
+		for(int temp1 = 1;temp1 < results.size();temp1++){
+			if(results[temp1] < lowest){
+				lowest = results[temp1];
+			}
+		}
+		printf("%d",lowest);
+	} else {
+		printf("No steps required");
+	}
+}
