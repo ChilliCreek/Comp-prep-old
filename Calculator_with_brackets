@@ -1,0 +1,147 @@
+//Ene program ni algebriin 4 n engiin uildel bolon haalttai ilerhiilel boddog yum(zovhon buhel too).
+//Ajillah zarchim ni recursion ashiglaj haaltiig dortoos ni bodoj ajillana.
+//Jishee = 3-9*(7-8)
+//7-8 iig ehleed bodoj -1 gargana
+//tegeed iim bolno:3-9*-1
+//tegeed hariu ni 12 garna.
+// Anhaarah zuils: iluu haalt bichvel ajillahgui,urjih uildliig zaaval oruulna.
+//Jishee : ((3-5)*9) ba (3-5)9 ni buruu example yum.
+//Zov ni : (3-5)*9
+//Hervee input buruu bol crash hiih yumuu buruu hariu (ihenhdee 0)gargana.
+//HERVEE ALDAA BAIVAL HELEEREI.BI SHALGASAN CH GESEN EDGE CASE BAIJ MAGADGUI YUM.
+//BAS C HELIIN STRING IH LIMITED FUNCTIONALITY TAI UCHIR JAAHAN ZAVAAN BODOLT BOLCHIHLOO.
+#include<cstdio>
+#include<cstring>
+#include<vector>
+struct number_with{
+	int numval;
+	char temdeg;
+};
+int calculator_with_bracket(char original_input[]){
+	int coos,cooe,ifclosed = 0,temp,temp1,number_return,indiketor=0,temp5;
+	bool if_ifclosed_modified = false;
+	int numbers[100];
+	for(temp = 0;temp < strlen(original_input);temp++){
+		if(original_input[temp] == '('){
+			if(if_ifclosed_modified == false){
+				coos = temp;
+				ifclosed++;
+				if_ifclosed_modified = true;
+			} else {
+				ifclosed++;
+			}
+			
+		}
+		if(original_input[temp] == ')' ){
+			ifclosed--;
+			if(if_ifclosed_modified == true && ifclosed == 0){
+				cooe = temp;
+				char replacement[998];
+				memset(replacement, 0, sizeof(replacement));
+				int temp2=0;
+				for(temp1 = coos+1;temp1 < cooe;temp1++){
+					replacement[temp2] = original_input[temp1];
+					temp2++;
+				}
+				numbers[indiketor]=(calculator_with_bracket(replacement));
+				indiketor++;
+				for(temp1 = coos;temp1 <= cooe;temp1++){
+					original_input[temp1] = 'o';
+				}
+				if_ifclosed_modified = false;
+			}
+		}
+	}
+	std::vector <number_with> input;
+	int vector_length=0,temp3;
+	number_with temp2;
+	temp2.temdeg = '+';
+	temp2.numval = 0;
+	indiketor = 0;
+	for(temp = 0;temp < strlen(original_input);temp++){
+		if(original_input[temp] == '9' ||original_input[temp] == '8' ||original_input[temp] == '7' ||original_input[temp] == '6' ||original_input[temp] == '5' ||original_input[temp] == '4' 
+		||original_input[temp] == '3' ||original_input[temp] == '2' ||original_input[temp] == '1' || original_input[temp] == '0' ){
+			if(temp2.numval==0){
+				temp2.numval = temp2.numval + (original_input[temp]-'0');
+			}else{
+				temp2.numval = (temp2.numval)*10 + (original_input[temp]-'0');
+			}
+			if(temp == strlen(original_input)-1){
+				input.push_back(temp2);
+				vector_length++;
+			}
+		}
+		if(original_input[temp] == '+'||original_input[temp] == '-'||original_input[temp] == '*'||original_input[temp] == '/'){
+			if(temp !=0){
+				input.push_back(temp2);
+			}
+			temp2.temdeg = original_input[temp];
+			temp2.numval = 0;
+			vector_length++;
+		}
+		if(original_input[temp]=='o'){
+			for(temp3 = temp;temp3 <strlen(original_input);temp3++){
+				if(original_input[temp3]!='o'){
+					temp = temp3 ;
+					temp2.numval = numbers[indiketor];
+					input.push_back(temp2);
+					vector_length++;
+					indiketor++;
+					temp2.numval = 0;
+					temp2.temdeg = original_input[temp3] ;
+					break;
+				}else{
+					if(temp3== strlen(original_input)-1){
+						temp2.numval = numbers[indiketor];
+						input.push_back(temp2);
+						vector_length++;
+						temp = temp3 + 1;
+					}
+				}
+			}
+		}
+	}
+	for(temp = 0;temp <vector_length;temp++){
+		if(input[temp].temdeg == '*'){
+			int temp6 = 1 ;
+			while(1){
+				if(input[temp-temp6].temdeg == 'x'){
+					temp6++;
+				}else{
+					input[temp-temp6].numval = input[temp-temp6].numval * input[temp].numval;
+			        input[temp].temdeg = 'x';
+			        break;
+				}
+			}
+		}
+		if(input[temp].temdeg == '/'){
+			int temp6 = 1 ;
+			while(1){
+				if(input[temp-temp6].temdeg == 'x'){
+					temp6++;
+				}else{
+					input[temp-temp6].numval = input[temp-temp6].numval / input[temp].numval;
+			        input[temp].temdeg = 'x';
+			        break;
+				}
+			}
+		}
+	}
+	number_return = 0;
+	for(temp = 0;temp < vector_length;temp++){
+		if(input[temp].temdeg == '+'){
+			number_return = number_return + input[temp].numval;
+		}
+		if(input[temp].temdeg == '-'){
+			number_return = number_return - input[temp].numval;
+		}
+	}
+	return number_return;
+}
+main(){
+	char original_input[1000];
+	int hariu;
+	scanf("%s",original_input);
+	hariu = calculator_with_bracket(original_input); 
+	printf("%d",hariu);
+}
