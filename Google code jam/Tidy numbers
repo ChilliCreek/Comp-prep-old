@@ -1,0 +1,52 @@
+#include<cstdio>
+#include<cstring>
+main(){
+	char n[20];
+	int n_array[20],ifnumfound=0,temp2,temp,temp1=0,t,case_n=1,temp3,ifbuursan=0;
+	//std::freopen("B-large-practice.in","r",stdin);
+	//std::freopen("B-small-practic.out","w",stdout);
+	scanf("%d",&t);
+	for(temp=0;temp<t;temp++){
+		ifnumfound=0;
+		ifbuursan=0;
+		temp1=0;
+		scanf("%s",n);
+		//printf("%s",n);
+		for(temp1=0;temp1<strlen(n);temp1++){
+			n_array[temp1]=(n[temp1]-'0');
+		}
+		temp1=strlen(n);
+		for(temp2=0;temp2<temp1;temp2++){
+			if(n_array[temp2]>n_array[temp2+1]){
+				if(ifbuursan == 0){
+					n_array[temp2]--;
+					if(n_array[temp2-1]>n_array[temp2] && temp2>0){
+						temp3=temp2;
+						while(n_array[temp3-1]>n_array[temp3] && temp3>0){
+						    n_array[temp3-1]--;
+						    n_array[temp3]=9;
+						    temp3--;
+						}
+					}
+					ifbuursan=1;
+				}
+				n_array[temp2+1]=9;
+			}
+		}
+		printf("Case #%d: ",case_n);
+		case_n++;
+		if(strlen(n)==1){
+			printf("%s\n",n);
+		}else{
+			for(temp2=0;temp2<temp1;temp2++){
+				if(n_array[temp2]==0 && ifnumfound==0){
+					
+				}else{
+					ifnumfound=1;
+					printf("%d",n_array[temp2]);
+				}
+			}
+			printf("\n");
+		}
+	}
+}
