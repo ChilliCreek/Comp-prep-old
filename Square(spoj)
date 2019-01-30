@@ -1,0 +1,101 @@
+//https://www.spoj.com/CSMS/problems/CSMS0055/
+#include<bits/stdc++.h>
+using namespace std;
+struct two_int{
+	int a;
+	int b;
+	bool operator <(const two_int& pt) const
+    {
+        return (a < pt.a) || ((!(pt.a < a)) && (b < pt.b));
+    }
+    bool operator ==(const two_int& ptt) const
+    {
+        return (a == ptt.a) && (b==ptt.b);
+    }
+    bool operator !=(const two_int& ptt) const
+    {
+        return (a != ptt.a) || (b!=ptt.b);
+    }
+};
+bool ifgud(set<two_int> bestset){
+	set<two_int>::iterator it,it1,it2,it3;
+	bool res=false;
+	two_int one,two,three,four;
+	for(it=bestset.begin();it!=bestset.end();it++){
+		one=*it;
+		for(it1=bestset.begin();it1!=bestset.end();it1++){
+			if(*it1!=one){
+				two=*it1;
+				for(it2=bestset.begin();it2!=bestset.end();it2++){
+					if(*it2!=one && *it2!=two){
+						three=*it2;
+						if(abs(one.a-two.a)==abs(two.b-three.b) && abs(one.b-two.b)==abs(two.a-three.a)){
+							for(it3=bestset.begin();it3!=bestset.end();it3++){
+								if(*it3!=one && *it3!=two && *it3!=three){
+									four=*it3;
+									if(abs(two.a-three.a)==abs(three.b-four.b) && abs(two.b-three.b)==abs(three.a-four.a)){
+										if(abs(three.a-four.a)==abs(four.b-one.b) && abs(three.b-four.b)==abs(four.a-one.a)){
+											return true;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+main(){
+	int n,arr[102][2],t,t1,t2;
+	float t_f,t_f1=INT_MAX;
+	two_int t_t;
+	map <float,vector<two_int> >tseguud;
+	set<two_int>::iterator its;
+	map <float,vector<two_int> >::iterator it;
+	cin>>n;
+	cin>>arr[0][0]>>arr[0][1];
+	for(t=1;t<n;t++){
+		cin>>arr[t][0]>>arr[t][1];
+		for(t1=0;t1<t;t1++){
+			t_f=sqrt(((float)arr[t1][0]-(float)arr[t][0])*((float)arr[t1][0]-(float)arr[t][0])+((float)arr[t1][1]-(float)arr[t][1])*((float)arr[t1][1]-(float)arr[t][1]));
+			t_t.a=arr[t1][0];
+			t_t.b=arr[t1][1];
+			tseguud[t_f].push_back(t_t);
+			t_t.a=arr[t][0];
+			t_t.b=arr[t][1];
+			tseguud[t_f].push_back(t_t);
+		}
+	}
+	set<two_int> bestset;
+	for(it=tseguud.begin();it!=tseguud.end();it++){
+		if(it->second.size()>=8){
+			t2=0;
+			for(t=0;t<it->second.size();t++){
+				for(t1=t;t1<it->second.size();t1++){
+					if(it->second[t].a==it->second[t1].a){
+						if(it->second[t].b==it->second[t1].b){
+							t2++;
+							bestset.insert(it->second[t]);
+						}
+					}
+				}
+			}
+			if(t2>3){
+				if(ifgud(bestset)==true){
+					if(it->first<t_f1){
+						t_f1=it->first;
+					}
+				}
+			}
+			bestset.clear();
+		}
+	}
+	if(INT_MAX==t_f1){
+		cout<<"No solution.";
+	}else{
+		cout<<fixed<<setprecision(1)<<t_f1*t_f1;
+	}
+}
