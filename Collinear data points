@@ -1,0 +1,51 @@
+//Problem:Given a list of 2d data points find out all collinear data points.
+#include<bits/stdc++.h>
+using namespace std;
+struct pairr{
+	float a,b;
+	bool operator <(const pairr& it)const{
+		return a<it.a || (a==it.a && b<it.b);
+	}
+	bool operator ==(const pairr& it)const{
+		return a==it.a && b==it.b;
+	}
+};
+pairr line(float x1,float y1,float x2,float y2){
+	pairr temporary;
+	temporary.a=(y2-y1)/(x2-x1);
+	temporary.b=x1*(y1-y2)/(x2-x1)+y1;
+	return temporary;
+}
+main(){
+	int t,i,n,result=-1;
+	pairr y;
+	map <pairr,set<pairr> >mapp;
+	map <pairr,set<pairr> >::iterator it;
+	set <pairr>::iterator setit;
+	pairr dots[1000];
+	cout<<"Enter the amount of dots you want to enter (>2):";
+	cin>>n;
+	if(n<2){
+		cout<<"Insufficient amount of dots";
+		return 0;
+	}
+	cin>>dots[0].a>>dots[0].b;
+	for(t=1;t<n;t++){
+		cin>>dots[t].a>>dots[t].b;
+		for(i=0;i<t;i++){
+			mapp[line(dots[i].a,dots[i].b,dots[t].a,dots[t].b)].insert(dots[i]);
+			mapp[line(dots[i].a,dots[i].b,dots[t].a,dots[t].b)].insert(dots[t]);
+		}
+	}
+	for(it=mapp.begin();it!=mapp.end();it++){
+		i=it->second.size();
+		if(i>result){
+			result=i;
+			y=it->first;
+		}
+	}
+	cout<<"Maximium amount of collinear data points are:";
+	for(setit=mapp[y].begin();setit!=mapp[y].end();setit++){
+		cout<<"("<<(*setit).a<<","<<(*setit).b<<") ";
+	}
+}
