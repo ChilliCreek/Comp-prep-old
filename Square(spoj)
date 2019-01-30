@@ -1,4 +1,4 @@
-//https://www.spoj.com/CSMS/problems/CSMS0055/
+//Problem:https://www.spoj.com/CSMS/problems/CSMS0055/
 #include<bits/stdc++.h>
 using namespace std;
 struct two_int{
