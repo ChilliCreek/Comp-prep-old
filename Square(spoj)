@@ -17,6 +17,7 @@ struct two_int{
         return (a != ptt.a) || (b!=ptt.b);
     }
 };
+//The function below checks if the points can make a square
 bool ifgud(set<two_int> bestset){
 	set<two_int>::iterator it,it1,it2,it3;
 	bool res=false;
@@ -57,9 +58,11 @@ main(){
 	map <float,vector<two_int> >::iterator it;
 	cin>>n;
 	cin>>arr[0][0]>>arr[0][1];
+	//Grouping the points with similar distance between them
 	for(t=1;t<n;t++){
 		cin>>arr[t][0]>>arr[t][1];
 		for(t1=0;t1<t;t1++){
+		        //Finding the distance between two points
 			t_f=sqrt(((float)arr[t1][0]-(float)arr[t][0])*((float)arr[t1][0]-(float)arr[t][0])+((float)arr[t1][1]-(float)arr[t][1])*((float)arr[t1][1]-(float)arr[t][1]));
 			t_t.a=arr[t1][0];
 			t_t.b=arr[t1][1];
@@ -70,6 +73,7 @@ main(){
 		}
 	}
 	set<two_int> bestset;
+	//if there is at least 4 pair of points with the same distance that means there can be a rectangle,but additional confirmation is required 
 	for(it=tseguud.begin();it!=tseguud.end();it++){
 		if(it->second.size()>=8){
 			t2=0;
@@ -84,6 +88,7 @@ main(){
 				}
 			}
 			if(t2>3){
+			        //Go to ifgud function for details
 				if(ifgud(bestset)==true){
 					if(it->first<t_f1){
 						t_f1=it->first;
